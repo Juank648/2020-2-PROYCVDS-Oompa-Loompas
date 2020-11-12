@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="edu.eci.cvds.persistencia.mybatisimpl.UsuarioMapper">
+	
+	
+	<resultMap type='Usuario' id='UsuarioResult'>
+		<id property='carnet' column='carnet'/>
+		<id property='nombre' column='nombre'/>
+	    <id property='correo' column='correo'/>
+	    <id property='contrasena' column='contrasena'/>
+	    <id property='estado' column='estado'/>
+		<result property='rol' column='rol'/>	
+	</resultMap>
+	
+	<select parameterType="map" id="consultarUsuarios" resultMap="UsuarioResult">
+		select 
+		u.nombre,
+		u.carnet,
+		u.correo,
+		u.contrasena,
+		u.estado,
+		u.rol
+		FROM usuario as u;
+	</select>
+	
+	<select id="consultarUsuarioLog" resultMap="UsuarioResult">
+		SELECT
+		u.nombre,
+		u.carnet,
+		u.correo,
+		u.contrasena,
+		u.estado,
+		u.rol
+		FROM usuario as u 
+		WHERE u.carnet = #{carneT} and u.contrasena = #{contrasenA};
+	</select>
+</mapper>
